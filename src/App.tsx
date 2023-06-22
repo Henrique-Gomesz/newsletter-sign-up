@@ -5,7 +5,6 @@ import { MobileForm } from "./components/screens/mobile/form/form";
 
 function App() {
   const [email, setEmail] = useState("");
-  const [hasError, setHasError] = useState(false);
   const [showSucessMessage, setShowSucessMessage] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -27,6 +26,10 @@ function App() {
     setShowSucessMessage(!showSucessMessage);
   };
 
+  const handleEmail = (newValue: string) => {
+    setEmail(newValue);
+  };
+
   const shouldRenderDesktop = () => {
     if (windowWidth > 900) return true;
     return false;
@@ -35,7 +38,7 @@ function App() {
   const renderDesktop = () => {
     return (
       <>
-        <DesktopForm />
+        <DesktopForm email={email} handleEmail={handleEmail} />
       </>
     );
   };

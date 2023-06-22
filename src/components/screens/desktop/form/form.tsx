@@ -26,20 +26,20 @@ const listItems = [
   "And much more!",
 ];
 
-export const DesktopForm = () => {
-  const [email, setEmail] = useState("");
+interface Props {
+  email: string;
+  handleEmail: (newvalue: string) => void;
+}
+
+export const DesktopForm = ({ email, handleEmail }: Props) => {
   const [hasError, setHasError] = useState(false);
-  const [showSucessMessage, setShowSucessMessage] = useState(false);
+
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const hasError = emailRegex.test(email);
     setHasError(!hasError);
-    setShowSucessMessage(hasError);
   };
 
-  const handleSucessMessage = () => {
-    setShowSucessMessage(!showSucessMessage);
-  };
   return (
     <MainWrapper>
       <ContentWrapper>
@@ -64,7 +64,7 @@ export const DesktopForm = () => {
             hasError={hasError}
             onChange={(event) => {
               setHasError(false);
-              setEmail(event.target.value);
+              handleEmail(event.target.value);
             }}
             value={email}
             placeholder="email@company.com"
