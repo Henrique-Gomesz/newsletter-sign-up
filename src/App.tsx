@@ -38,7 +38,11 @@ function App() {
   const renderDesktop = () => {
     return (
       <>
-        <DesktopForm email={email} handleEmail={handleEmail} />
+        <DesktopForm
+          handleShowSuccess={handleSucessMessage}
+          email={email}
+          handleEmail={handleEmail}
+        />
       </>
     );
   };

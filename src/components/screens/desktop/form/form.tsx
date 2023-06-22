@@ -29,15 +29,21 @@ const listItems = [
 interface Props {
   email: string;
   handleEmail: (newvalue: string) => void;
+  handleShowSuccess: () => void;
 }
 
-export const DesktopForm = ({ email, handleEmail }: Props) => {
+export const DesktopForm = ({
+  handleShowSuccess,
+  email,
+  handleEmail,
+}: Props) => {
   const [hasError, setHasError] = useState(false);
 
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const hasError = emailRegex.test(email);
     setHasError(!hasError);
+    if (hasError) handleShowSuccess();
   };
 
   return (
@@ -75,7 +81,9 @@ export const DesktopForm = ({ email, handleEmail }: Props) => {
         </EmailInputWrapper>
         <ButtonWrapper>
           <Button
-            onPress={validateEmail}
+            onPress={() => {
+              validateEmail();
+            }}
             label="Subscribe to monthly newsletter"
           />
         </ButtonWrapper>
